@@ -46,3 +46,28 @@ button {
 button:hover {
   background-color: #194432;
 }
+
+/* Book Collection */
+.book-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+}
+
+/* Book Cards */
+.book-card {
+  background-color: var(--card-color);
+  padding: 22px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+}
+
+.book-card h3 {
+  margin-bottom: 10px;
+}
+
+.book-card p {
+  color: var(--muted-color);
+  margin-bottom: 8px;
+}
