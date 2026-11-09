@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #245c48;
+  --primary-color: #24435c;
   --secondary-color: #e8f0eb;
   --background-color: #f5f7f5;
   --card-color: #ffffff;
@@ -41,10 +41,27 @@ button {
   color: white;
   font-size: 20px;
   transition: background-color 0.2s ease;
+  margin: 8px;
 }
 
 button:hover {
   background-color: #194432;
+}
+
+/* Default state (Not Read) */
+.book-card button:not(.remove-btn) {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Toggled state (Read) */
+.book-card button.is-read {
+  background-color: #4c87af; /* Green */
+  color: white;
 }
 
 /* Book Collection */
@@ -70,4 +87,62 @@ button:hover {
 .book-card p {
   color: var(--muted-color);
   margin-bottom: 8px;
+}
+/* Dialog */
+#book-dialog {
+  width: 90%;
+  max-width: 450px;
+  margin: auto;
+  padding: 30px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+#book-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Form */
+#book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#close-dialog-btn {
+  background-color: #777;
+}
+/* Responsive Layout */
+@media (max-width: 600px) {
+  .container {
+    width: 92%;
+    margin: 25px auto;
+  }
+
+  .header {
+    padding: 18px 4%;
+  }
+
+  .book-container {
+    grid-template-columns: 1fr;
+  }
 }

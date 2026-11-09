@@ -7,6 +7,10 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
 
+  Book.prototype.toggleRead = function () {
+    this.read = !this.read;
+  };
+
   //   this.info = function () {
   //     const readStatus = this.read ? "read" : "not read";
   //     return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus} `;
@@ -39,8 +43,8 @@ function displayBooks() {
     const pages = document.createElement("p");
     pages.textContent = `Pages: ${book.pages}`;
 
-    const status = document.createElement("p");
-    status.textContent = book.read ? "Read" : "Not Read";
+    // const status = document.createElement("p");
+    // status.textContent = book.read ? "Read" : "Not Read";
 
     const removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
@@ -53,7 +57,16 @@ function displayBooks() {
       myLibrary.splice(bookIndex, 1);
       displayBooks();
     });
-    card.append(title, author, pages, status, removeButton);
+
+    const readBtn = document.createElement("button");
+    readBtn.textContent = book.read ? "Read" : "Not Read";
+    readBtn.classList.toggle("is-read", book.read);
+    readBtn.addEventListener("click", function () {
+      book.toggleRead();
+      displayBooks();
+    });
+
+    card.append(title, author, pages, removeButton, readBtn);
     bookContainer.appendChild(card);
   });
 }
@@ -74,3 +87,18 @@ closeDialogBtn.addEventListener("click", function () {
   bookDialog.close();
 });
 
+const bookForm = document.querySelector("#book-form");
+
+bookForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const title = bookForm.elements.title.value.trim();
+  const author = bookForm.elements.author.value.trim();
+  const pages = Number(bookForm.elements.pages.value);
+  const read = bookForm.elements.read.checked;
+
+  addBookToLibrary(title, author, pages, read);
+  displayBooks();
+  bookForm.reset();
+  bookDialog.close();
+});
